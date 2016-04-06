@@ -1,0 +1,12 @@
+
+<ion-navbar *navbar>
+  <ion-title>
+    Display Entries
+  </ion-title>
+</ion-navbar>
+
+<ion-content class="page2">
+	<button ion-item *ngFor="#person of personDetails" (click)="personTapped(person)">
+ 		<ion-icon name="ios-man-outline" item-left></ion-icon>{{person.lastname}}, {{person.firstname}}
+ 	</button>
+</ion-content>
