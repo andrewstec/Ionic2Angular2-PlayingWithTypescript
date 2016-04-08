@@ -10,12 +10,16 @@ export class Page2 {
 	people: string[];
 	personDetails: Array<{firstname: string, lastname: string, city: string, id: number}>;
 
+  onPageWillEnter() {
+      this.list();
+  }
+
   constructor(platform: Platform, private nav: NavController, navParams: NavParams) {
   	this.platform = platform;
   	this.people = [];
-    this.personDetails = [];
-  	this.storage = new Storage(SqlStorage);
+
   	this.platform.ready().then(()=>{
+      this.storage = new Storage(SqlStorage);
   		this.list();
   	})
   	}
@@ -26,6 +30,7 @@ export class Page2 {
   			this.storage.query("SELECT * FROM people")
   			.then((data)=>{
   				this.people = [];
+          this.personDetails = [];
   				console.log(JSON.stringify(data.res));
   				console.log("Length of the data query: " + data.res.rows.length);
   				for (var i = 0; i < data.res.rows.length; i++ ) {
